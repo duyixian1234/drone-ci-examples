@@ -1,0 +1,38 @@
+kind: pipeline
+type: docker
+name: default
+
+steps:
+- name: Prepare
+  image: busybox
+  commands:
+  - echo "Hello World" > a.txt
+  - echo "Hello World" > b.txt
+- name: Slow Step A
+  depends_on:
+  - Prepare
+  image: busybox
+  commands:
+  - sleep 5
+  - cat a.txt > c.txt
+- name: Slow Step B
+  depends_on:
+  - Prepare
+  image: busybox
+  commands:
+  - sleep 10
+  - cat b.txt
+- name: Slow Step C
+  depends_on:
+  - Slow Step A
+  image: busybox
+  commands:
+  - sleep 5
+  - cat c.txt
+- name: Cleanup
+  depends_on:
+  - Slow Step B
+  - Slow Step C
+  image: busybox
+  commands:
+  - rm a.txt b.txt c.txt

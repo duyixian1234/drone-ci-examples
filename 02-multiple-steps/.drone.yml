@@ -1,0 +1,21 @@
+kind: pipeline
+type: docker
+name: default
+
+steps:
+- name: Step 1
+  image: busybox
+  commands:
+  - echo "Step 1"
+  - echo "Hello World" > a.txt
+- name: Step 2
+  image: busybox
+  commands:
+  - echo "Step 2"
+  - cat a.txt
+- name: Step 3
+  image: busybox
+  commands:
+  - echo "Step 3"
+  - rm a.txt
+
