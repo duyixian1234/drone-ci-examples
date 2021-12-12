@@ -1,0 +1,8 @@
+-r requirements.txt
+pylint
+requests
+mypy
+isort
+pytest
+pytest-cov
+black

@@ -1,0 +1,14 @@
+kind: pipeline
+type: docker
+name: default
+
+steps:
+- name: CI
+  image: python:3.9-slim
+  commands:
+  - cd 04-python-example
+  - pip install -r requirements-dev.txt -q
+  - pylint main.py
+  - mypy main.py
+  - isort --check main.py
+  - pytest tests --cov=main --cov-fail-under=80
