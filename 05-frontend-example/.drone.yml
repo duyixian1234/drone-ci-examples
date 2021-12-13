@@ -1,0 +1,24 @@
+kind: pipeline
+type: docker
+name: default
+
+steps:
+- name: Install Dependencies
+  image: node:16-alpine
+  commands:
+  - cd 05-frontend-example
+  - npm install --quiet --registry=http://mirrors.cloud.tencent.com/npm/
+- name: Run Tests
+  depends_on:
+  - Install Dependencies
+  image: node:16-alpine
+  commands:
+  - cd 05-frontend-example
+  - npm run test --watchAll=false
+- name: Build
+  depends_on:
+  - Install Dependencies
+  image: node:16-alpine
+  commands:
+  - cd 05-frontend-example
+  - npm run build
