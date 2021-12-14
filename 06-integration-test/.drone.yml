@@ -1,0 +1,21 @@
+kind: pipeline
+type: docker
+name: default
+
+steps:
+- name: Prepeare
+  image: redis
+  commands:
+  - while ! redis-cli -h cache ping; do sleep 1; done
+  - echo "Cache server is up"
+- name: Run Integration Tests
+  image: python:3.9-slim
+  commands:
+  - cd 06-integration-test
+  - pip install -r requirements-dev.txt -q
+  - pytest -sv test_cache.py
+
+
+services:
+- name: cache
+  image: redis
