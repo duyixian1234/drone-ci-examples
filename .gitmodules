@@ -1,0 +1,3 @@
+[submodule "qr-web"]
+	path = qr-web
+	url = git@github.com:duyixian1234/qr-web.git

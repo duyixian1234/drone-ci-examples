@@ -1,0 +1,26 @@
+kind: pipeline
+type: docker
+name: default
+
+clone:
+  depth: 1
+
+steps:
+- name: submodules
+  image: alpine/git
+  commands:
+  - 'git config --global url."https://github.com/".insteadOf git@github.com:'
+  - git submodule update --init --recursive
+- name: api-server
+  detach: true
+  image: python:3.8-slim
+  commands:
+  - cd qr-web
+  - pip install -r requirements.txt -q
+  - flask run --host 0.0.0.0 --port 8080
+- name: Test API
+  image: curlimages/curl
+  commands:
+  - while ! curl -s -o /dev/null http://api-server:8080/status; do sleep 1; done
+  - rm -rf ./qr.png
+  - curl http://api-server:8080/qr?content=Hello%20World
