@@ -1,0 +1,25 @@
+{
+  "name": "drone-ci-examples",
+  "version": "1.0.0",
+  "description": "Author: Yixian Du",
+  "main": "index.js",
+  "scripts": {
+    "dev": "slidev",
+    "build": "slidev build",
+    "export": "slidev export"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/duyixian1234/drone-ci-examples.git"
+  },
+  "author": "duyixian",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/duyixian1234/drone-ci-examples/issues"
+  },
+  "homepage": "https://github.com/duyixian1234/drone-ci-examples#readme",
+  "dependencies": {
+    "@slidev/cli": "^0.27.20",
+    "@slidev/theme-default": "^0.21.1"
+  }
+}

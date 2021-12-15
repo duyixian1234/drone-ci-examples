@@ -1,0 +1,12 @@
+kind: pipeline
+name: default
+
+steps:
+- name: download  
+  image: plugins/download
+  settings:
+    source: https://raw.githubusercontent.com/duyixian1234/drone-ci-examples/master/README.md
+- name: cat
+  image: busybox
+  commands:
+  - cat README.md
